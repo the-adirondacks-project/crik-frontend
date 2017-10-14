@@ -8,8 +8,8 @@
       Error: {{ error }}
     </div>
 
-    <div v-for="video in videos">
-      <router-link :to="makeVideoUrl(video.id)">{{ video.name }}</router-link>
+    <div v-for="file in files">
+      {{ file.url }}
     </div>
   </div>
 </template>
@@ -18,28 +18,24 @@
 import Vue from 'vue';
 
 export default {
-  name: 'EpisodeList',
+  name: 'Video',
   data() {
     return {
       loading: true,
       error: null,
-      videos: null,
+      files: null,
     };
   },
   created() {
-    this.fetchVideos();
+    this.fetchVideo();
   },
   watch: {
-    $route: 'fetchData',
+    $route: 'fetchVideo',
   },
   methods: {
-    makeVideoUrl(videoId) {
-      return `/video/${videoId}`;
-    },
-
-    fetchVideos() {
-      Vue.http.get('/api/videos').then((response) => {
-        this.videos = response.body;
+    fetchVideo() {
+      Vue.http.get(`/api/videos/${this.$route.params.videoId}/files`).then((response) => {
+        this.files = response.body;
         this.loading = false;
       }, (response) => {
         this.error = response.statusText;
