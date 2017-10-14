@@ -18,7 +18,7 @@
 import Vue from 'vue';
 
 export default {
-  name: 'EpisodeList',
+  name: 'VideoList',
   data() {
     return {
       loading: true,
