@@ -9,7 +9,7 @@
     </div>
 
     <div v-for="file in files">
-      {{ file.url }}
+      <router-link :to="makeVideoPlayerUrl(file.url)">{{ file.url }}</router-link>
     </div>
   </div>
 </template>
@@ -33,6 +33,9 @@ export default {
     $route: 'fetchVideo',
   },
   methods: {
+    makeVideoPlayerUrl(fileUrl) {
+      return `/video-player/${encodeURIComponent(fileUrl)}`;
+    },
     fetchVideo() {
       Vue.http.get(`/api/videos/${this.$route.params.videoId}/files`).then((response) => {
         this.files = response.body;
