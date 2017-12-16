@@ -14,6 +14,7 @@ export default {
 body {
   margin: 0px;
   background-color: #151515;
+  color: #DDDDDD;
 }
 
 a {

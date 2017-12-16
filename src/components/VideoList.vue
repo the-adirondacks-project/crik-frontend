@@ -1,5 +1,9 @@
 <template>
   <div id="videoList">
+    <main-header>
+      <button class="add-button">+</button>
+    </main-header>
+
     <div v-if="loading">
       Loading...
     </div>
@@ -17,6 +21,8 @@
 <script>
 import Vue from 'vue';
 
+import MainHeader from './MainHeader';
+
 export default {
   name: 'VideoList',
   data() {
@@ -28,6 +34,9 @@ export default {
   },
   created() {
     this.fetchVideos();
+  },
+  components: {
+    MainHeader,
   },
   watch: {
     $route: 'fetchData',
@@ -53,5 +62,23 @@ export default {
 <style scoped>
 #videoList {
   text-align: center;
+}
+
+.add-button {
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+  border: 2px solid;
+  background-color: #151515;
+  color: #DEDEDE;
+}
+
+.add-button:hover {
+  color: #A6A6A6;
+}
+
+.add-button::-moz-focus-inner {
+  border-style: none;
 }
 </style>
