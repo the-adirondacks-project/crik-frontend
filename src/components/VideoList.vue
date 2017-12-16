@@ -1,7 +1,7 @@
 <template>
   <div id="videoList">
     <main-header>
-      <button class="add-button">+</button>
+      <button v-on:click="showNewVideo" class="add-button">+</button>
     </main-header>
 
     <div v-if="loading">
@@ -15,6 +15,14 @@
     <div v-for="video in videos">
       <router-link :to="makeVideoUrl(video.id)">{{ video.name }}</router-link>
     </div>
+
+    <input
+      v-if="this.addVideo"
+      ref="addVideoInput"
+      v-model="newVideo"
+      v-on:keyup.enter="createVideo"
+      v-on:blur="createVideo">
+    </input>
   </div>
 </template>
 
@@ -30,6 +38,8 @@ export default {
       loading: true,
       error: null,
       videos: null,
+      newVideo: null,
+      addVideo: false,
     };
   },
   created() {
@@ -42,8 +52,30 @@ export default {
     $route: 'fetchData',
   },
   methods: {
+    createVideo() {
+      this.addVideo = false;
+
+      const newVideo = {
+        name: this.newVideo,
+      };
+
+      console.log(this.newVideo);
+
+      this.videos.push(newVideo);
+      Vue.http.post('api/videos', newVideo).then((response) => {
+        console.log(newVideo);
+        newVideo.id = response.data.id;
+        console.log(newVideo);
+      });
+    },
+
     makeVideoUrl(videoId) {
       return `/video/${videoId}`;
+    },
+
+    showNewVideo() {
+      this.addVideo = true;
+      this.$nextTick(() => this.$refs.addVideoInput.focus());
     },
 
     fetchVideos() {
