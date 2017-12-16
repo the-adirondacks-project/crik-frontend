@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="videoList">
     <div v-if="loading">
       Loading...
     </div>
@@ -51,4 +51,7 @@ export default {
 </script>
 
 <style scoped>
+#videoList {
+  text-align: center;
+}
 </style>

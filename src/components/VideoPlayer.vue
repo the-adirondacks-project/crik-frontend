@@ -1,6 +1,6 @@
 <template>
   <div>
-    <video preload="metadata" muted="true" controls width="500" height="500">
+    <video id="video" preload="metadata" controls>
       <source :src="$route.params.fileUrl">
     </video>
   </div>
@@ -13,4 +13,9 @@ export default {
 </script>
 
 <style scoped>
+  #video {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
 </style>
