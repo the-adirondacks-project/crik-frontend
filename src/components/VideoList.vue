@@ -59,13 +59,9 @@ export default {
         name: this.newVideo,
       };
 
-      console.log(this.newVideo);
-
       this.videos.push(newVideo);
       Vue.http.post('api/videos', newVideo).then((response) => {
-        console.log(newVideo);
         newVideo.id = response.data.id;
-        console.log(newVideo);
       });
     },
 
