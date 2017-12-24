@@ -1,8 +1,8 @@
 <template>
   <div id="videoList">
-    <main-header>
+    <top-bar>
       <button v-on:click="showNewVideo" class="add-button">+</button>
-    </main-header>
+    </top-bar>
 
     <div v-if="loading">
       Loading...
@@ -29,7 +29,7 @@
 <script>
 import Vue from 'vue';
 
-import MainHeader from './MainHeader';
+import TopBar from './TopBar';
 
 export default {
   name: 'VideoList',
@@ -46,7 +46,7 @@ export default {
     this.fetchVideos();
   },
   components: {
-    MainHeader,
+    TopBar,
   },
   watch: {
     $route: 'fetchData',
