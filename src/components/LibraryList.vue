@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 10px;">
+  <div style="padding: 10px;">
     <table style="width: 100%">
       <thead>
         <tr>
