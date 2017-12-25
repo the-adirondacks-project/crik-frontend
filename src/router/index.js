@@ -1,6 +1,8 @@
+import Router from 'vue-router';
 import Vue from 'vue';
 import VueResource from 'vue-resource';
-import Router from 'vue-router';
+
+import LibraryList from '@/components/LibraryList';
 import VideoList from '@/components/VideoList';
 import Video from '@/components/Video';
 import VideoPlayer from '@/components/VideoPlayer';
@@ -14,6 +16,11 @@ export default new Router({
       path: '/',
       name: 'Videos',
       component: VideoList,
+    },
+    {
+      path: '/libraries',
+      name: 'Libraries',
+      component: LibraryList,
     },
     {
       path: '/video/:videoId',
