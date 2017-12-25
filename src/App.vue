@@ -1,23 +1,33 @@
 <template>
   <div id="app" class="full-height">
-    <div class="left-bar">
-      <div class="left-button">
-        Videos
-      </div>
-      <div class="left-button">
-        Libraries
-      </div>
-    </div>
-    <div class="content-pane">
+    <nav-pane :tabs="this.tabs" v-on:select="handleSelect">
       <router-view>
       </router-view>
-    </div>
+    </nav-pane>
   </div>
 </template>
 
 <script>
+import NavPane from './components/NavPane';
+
 export default {
+  components: {
+    NavPane,
+  },
+  methods: {
+    handleSelect(tab) {
+      this.$router.push(tab.route);
+    },
+  },
   name: 'app',
+  data() {
+    return {
+      tabs: [
+        { name: 'Videos', route: '/' },
+        { name: 'Libraries', route: '/libraries' },
+      ],
+    };
+  },
 };
 </script>
 
@@ -35,27 +45,6 @@ body {
 
 .full-height {
   height: 100%;
-}
-
-.left-bar {
-  background-color: #222222;
-  float: left;
-  height: 100%;
-  width: 100px;
-}
-
-.left-button {
-  padding-left: 10px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-}
-
-.left-button:hover {
-  background-color: #404040;
-}
-
-.content-pane {
-  margin-left: 100px;
 }
 
 a {
