@@ -3,7 +3,7 @@
     <div class="left-bar">
       <div
         class="left-button"
-        v-bind:class="{ selected: tab === selectedTab }"
+        v-bind:class="{ selected: tab === selected }"
         v-for="tab in tabs"
         v-on:click="handleClick(tab)">
         {{ tab.name }}
@@ -17,21 +17,16 @@
 
 <script>
 export default {
-  data() {
-    return {
-      selectedTab: this.tabs[0],
-    };
-  },
   methods: {
     handleClick(tab) {
-      if (this.selectedTab !== tab) {
-        this.selectedTab = tab;
+      if (this.selected !== tab) {
+        this.$emit('update:selected', tab);
         this.$emit('select', tab);
       }
     },
   },
   name: 'NavPane',
-  props: ['tabs'],
+  props: ['tabs', 'selected'],
 };
 </script>
 

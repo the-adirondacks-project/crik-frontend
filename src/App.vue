@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="full-height">
-    <nav-pane :tabs="this.tabs" v-on:select="handleSelect">
+    <nav-pane :tabs="tabs" :selected.sync="selected" v-on:select="handleSelect">
       <router-view>
       </router-view>
     </nav-pane>
@@ -8,24 +8,30 @@
 </template>
 
 <script>
+import _ from 'lodash';
+
 import NavPane from './components/NavPane';
 
 export default {
   components: {
     NavPane,
   },
+  created() {
+    this.selected = _.find(this.tabs, tab => tab.route === this.$route.name);
+  },
   methods: {
     handleSelect(tab) {
-      this.$router.push(tab.route);
+      this.$router.push({ name: tab.route });
     },
   },
   name: 'app',
   data() {
     return {
       tabs: [
-        { name: 'Videos', route: '/' },
-        { name: 'Libraries', route: '/libraries' },
+        { name: 'Videos', route: 'Videos' },
+        { name: 'Libraries', route: 'Libraries' },
       ],
+      selected: '',
     };
   },
 };
