@@ -1,7 +1,7 @@
 <template>
   <div id="videoList">
     <top-bar>
-      <button v-on:click="showNewVideo" class="add-button">+</button>
+      <add-button v-on:click.native="showNewVideo"></add-button>
     </top-bar>
 
     <div v-if="loading">
@@ -29,6 +29,7 @@
 <script>
 import Vue from 'vue';
 
+import AddButton from './AddButton';
 import TopBar from './TopBar';
 
 export default {
@@ -46,6 +47,7 @@ export default {
     this.fetchVideos();
   },
   components: {
+    AddButton,
     TopBar,
   },
   watch: {
@@ -90,23 +92,5 @@ export default {
 <style scoped>
 #videoList {
   text-align: center;
-}
-
-.add-button {
-  width: 20px;
-  height: 20px;
-  padding: 0px;
-  margin: 0px;
-  border: 2px solid;
-  background-color: #151515;
-  color: #DEDEDE;
-}
-
-.add-button:hover {
-  color: #A6A6A6;
-}
-
-.add-button::-moz-focus-inner {
-  border-style: none;
 }
 </style>
