@@ -14,8 +14,10 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import 'babel-polyfill';
+
+import axios from 'axios';
 
 export default {
   name: 'Video',
@@ -33,17 +35,18 @@ export default {
     $route: 'fetchVideo',
   },
   methods: {
-    makeVideoPlayerUrl(fileUrl) {
+    makeVideoPlayerUrl(fileUrl: string) {
       return `/video-player/${encodeURIComponent(fileUrl)}`;
     },
-    fetchVideo() {
-      Vue.http.get(`/api/videos/${this.$route.params.videoId}/files`).then((response) => {
-        this.files = response.body;
+    async fetchVideo() {
+      try {
+        const videoResponse = await axios.get(`/api/videos/${this.$route.params.videoId}/files`);
+        this.files = videoResponse.data;
         this.loading = false;
-      }, (response) => {
-        this.error = response.statusText;
+      } catch (error) {
+        this.error = error.statusText;
         this.loading = false;
-      });
+      }
     },
   },
 };

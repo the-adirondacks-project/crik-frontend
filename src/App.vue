@@ -7,8 +7,8 @@
   </div>
 </template>
 
-<script>
-import _ from 'lodash';
+<script lang="ts">
+import * as _ from 'lodash';
 
 import NavPane from './components/NavPane';
 
@@ -20,7 +20,7 @@ export default {
     this.selected = _.find(this.tabs, tab => tab.route === this.$route.name);
   },
   methods: {
-    handleSelect(tab) {
+    handleSelect(tab: any) {
       this.$router.push({ name: tab.route });
     },
   },

@@ -15,10 +15,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   methods: {
-    handleClick(tab) {
+    handleClick(tab: any) {
       if (this.selected !== tab) {
         this.$emit('update:selected', tab);
         this.$emit('select', tab);
