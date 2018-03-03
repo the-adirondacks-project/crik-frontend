@@ -1,0 +1,13 @@
+{
+  "extends": "tslint-config-airbnb",
+  "rules": {
+    "object-shorthand-properties-first": false,
+    "import-name": [
+      true,
+      {
+        "vue": "Vue",
+        "vueRouter": "VueRouter"
+      }
+    ]
+  }
+}
