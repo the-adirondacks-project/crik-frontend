@@ -43,8 +43,10 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import 'babel-polyfill';
+
+import axios from 'axios';
 
 import AddButton from './AddButton';
 import TopBar from './TopBar';
@@ -65,27 +67,28 @@ export default {
     TopBar,
   },
   methods: {
-    fetchLibraries() {
-      Vue.http.get('/api/video_libraries').then((response) => {
-        this.libraries = response.body;
+    async fetchLibraries() {
+      try {
+        const libraryResponse = await axios.get('/api/video_libraries');
+        this.libraries = libraryResponse.data;
         this.loading = false;
-      }, (response) => {
-        this.error = response.statusText;
+      } catch (error) {
+        this.error = error.statusText;
         this.loading = false;
-      });
+      }
     },
 
-    createLibrary() {
+    async createLibrary() {
       this.showNewLibrary = false;
 
       const newLibrary = {
         url: this.newLibrary,
+        id: '',
       };
 
       this.libraries.push(newLibrary);
-      Vue.http.post('api/video_libraries', newLibrary).then((response) => {
-        newLibrary.id = response.data.id;
-      });
+      const libraryResponse = await axios.post('api/video_libraries', newLibrary);
+      newLibrary.id = libraryResponse.data.id;
     },
 
     handleNewLibrary() {

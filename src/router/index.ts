@@ -1,16 +1,14 @@
-import Router from 'vue-router';
+import VueRouter from 'vue-router';
 import Vue from 'vue';
-import VueResource from 'vue-resource';
 
 import LibraryList from '@/components/LibraryList';
 import VideoList from '@/components/VideoList';
 import Video from '@/components/Video';
 import VideoPlayer from '@/components/VideoPlayer';
 
-Vue.use(VueResource);
-Vue.use(Router);
+Vue.use(VueRouter);
 
-export default new Router({
+export default new VueRouter({
   routes: [
     {
       path: '/',

@@ -26,8 +26,10 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import 'babel-polyfill';
+
+import axios from 'axios';
 
 import AddButton from './AddButton';
 import TopBar from './TopBar';
@@ -54,20 +56,20 @@ export default {
     $route: 'fetchData',
   },
   methods: {
-    createVideo() {
+    async createVideo() {
       this.addVideo = false;
 
       const newVideo = {
         name: this.newVideo,
+        id: '',
       };
 
       this.videos.push(newVideo);
-      Vue.http.post('api/videos', newVideo).then((response) => {
-        newVideo.id = response.data.id;
-      });
+      const videoResponse = await axios.post('api/videos', newVideo);
+      newVideo.id = videoResponse.data.id;
     },
 
-    makeVideoUrl(videoId) {
+    makeVideoUrl(videoId: string) {
       return `/video/${videoId}`;
     },
 
@@ -76,14 +78,15 @@ export default {
       this.$nextTick(() => this.$refs.addVideoInput.focus());
     },
 
-    fetchVideos() {
-      Vue.http.get('/api/videos').then((response) => {
-        this.videos = response.body;
+    async fetchVideos() {
+      try {
+        const videoResponse = await axios.get('/api/videos');
+        this.videos = videoResponse.data;
         this.loading = false;
-      }, (response) => {
-        this.error = response.statusText;
+      } catch (error) {
+        this.error = error.statusText;
         this.loading = false;
-      });
+      }
     },
   },
 };
