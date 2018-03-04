@@ -12,50 +12,29 @@ module.exports = {
   entry: {
     app: './src/main.ts'
   },
-  output: {
-    path: config.build.assetsRoot,
-    filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
-  },
-  resolve: {
-    extensions: ['.ts', '.js', '.vue', '.json'],
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
-    }
-  },
   module: {
     rules: [
       {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
         enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig
-      },
-      {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
         exclude: /node_modules/,
+        include: [resolve('src')],
+        loader: 'tslint-loader',
+        test: /^(?!.*vue).*\.ts$/,
+      },
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
         options: {
           appendTsSuffixTo: [/\.vue$/],
         }
       },
       {
-        test: /\.tsx?$/,
-        enforce: 'pre',
-        loader: 'tslint-loader',
+        test: /\.vue$/,
+        loader: 'vue-loader',
         options: {
-          configFile: './tslint.json'
+          loaders: {
+            ts: 'ts-loader!tslint-loader'
+          }
         }
       },
       {
@@ -88,5 +67,22 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  node: {
+    fs: "empty"
+  },
+  output: {
+    path: config.build.assetsRoot,
+    filename: '[name].js',
+    publicPath: process.env.NODE_ENV === 'production'
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
+  },
+  resolve: {
+    extensions: ['.ts', '.js', '.vue', '.json'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+    }
+  },
 }
