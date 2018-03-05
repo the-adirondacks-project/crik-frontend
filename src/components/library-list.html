@@ -1,0 +1,42 @@
+<div>
+  <top-bar>
+    <add-button v-on:click.native="handleNewLibrary"></add-button>
+  </top-bar>
+  <div style="padding: 10px;">
+    <table style="width: 100%">
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            URL
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="library in libraries">
+          <td>
+            name tbd
+          </td>
+          <td>
+            {{ library.url }}
+          </td>
+        </tr>
+        <tr v-if="showNewLibrary">
+          <td>
+            name tbd
+          </td>
+          <td>
+            <input
+              ref="addLibraryInput"
+              v-model="newLibrary"
+              v-on:keyup.enter="createLibrary"
+              v-on:blur="createLibrary">
+            </input>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

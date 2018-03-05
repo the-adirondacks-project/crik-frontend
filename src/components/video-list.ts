@@ -1,41 +1,16 @@
-<template>
-  <div id="videoList">
-    <top-bar>
-      <add-button v-on:click.native="showNewVideo"></add-button>
-    </top-bar>
-
-    <div v-if="loading">
-      Loading...
-    </div>
-
-    <div v-if="error">
-      Error: {{ error }}
-    </div>
-
-    <div v-for="video in videos">
-      <router-link :to="makeVideoUrl(video.id)">{{ video.name }}</router-link>
-    </div>
-
-    <input
-      v-if="this.addVideo"
-      ref="addVideoInput"
-      v-model="newVideo"
-      v-on:keyup.enter="createVideo"
-      v-on:blur="createVideo">
-    </input>
-  </div>
-</template>
-
-<script lang="ts">
 import 'babel-polyfill';
 
 import axios from 'axios';
+import Vue from 'vue';
 
-import AddButton from './AddButton';
-import TopBar from './TopBar';
+import template from './video-list-component.html';
 
-export default {
+import { AddButton } from './add-button';
+import { TopBar } from './top-bar';
+
+export const VideoList = Vue.component('video-list', {
   name: 'VideoList',
+  template,
   data() {
     return {
       loading: true,
@@ -89,11 +64,4 @@ export default {
       }
     },
   },
-};
-</script>
-
-<style scoped>
-#videoList {
-  text-align: center;
-}
-</style>
+});

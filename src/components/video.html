@@ -1,0 +1,13 @@
+<div id="videoFiles">
+  <div v-if="loading">
+    Loading...
+  </div>
+
+  <div v-if="error">
+    Error: {{ error }}
+  </div>
+
+  <div v-for="file in files">
+    <router-link :to="makeVideoPlayerUrl(file.url)">{{ file.url }}</router-link>
+  </div>
+</div>

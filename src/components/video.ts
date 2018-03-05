@@ -1,26 +1,13 @@
-<template>
-  <div id="videoFiles">
-    <div v-if="loading">
-      Loading...
-    </div>
-
-    <div v-if="error">
-      Error: {{ error }}
-    </div>
-
-    <div v-for="file in files">
-      <router-link :to="makeVideoPlayerUrl(file.url)">{{ file.url }}</router-link>
-    </div>
-  </div>
-</template>
-
-<script lang="ts">
 import 'babel-polyfill';
 
 import axios from 'axios';
+import Vue from 'vue';
 
-export default {
+import template from './video.html';
+
+export const Video = Vue.component('video', {
   name: 'Video',
+  template,
   data() {
     return {
       loading: true,
@@ -49,11 +36,4 @@ export default {
       }
     },
   },
-};
-</script>
-
-<style scoped>
-#videoFiles {
-  text-align: center;
-}
-</style>
+});

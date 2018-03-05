@@ -7,7 +7,7 @@ export interface RawVideo {
 }
 
 export class Video {
-  static validate({name, id}: RawVideo): boolean {
+  static validate({ name, id }: RawVideo): boolean {
     if (!_.isString(name)) {
       return false;
     }
@@ -22,7 +22,7 @@ export class Video {
   private _name: string;
   private readonly _id: number;
 
-  constructor({name, id}: RawVideo) {
+  constructor({ name, id }: RawVideo) {
     this._name = name;
     this._id = id;
   }

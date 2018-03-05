@@ -1,0 +1,19 @@
+table {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+}
+
+td, th {
+  padding: 0;
+}
+
+table tr:nth-child(odd) td{
+  background-color: #252525;
+}
+
+table tr:nth-child(even) td{
+  background-color: #353535;
+}
