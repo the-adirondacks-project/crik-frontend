@@ -1,13 +1,16 @@
 {
-  "extends": "tslint-config-airbnb",
+  "extends": ["tslint-consistent-codestyle", "tslint-config-airbnb"],
   "rules": {
-    "object-shorthand-properties-first": false,
-    "import-name": [
+    "import-name": false,
+    "naming-convention": [
       true,
-      {
-        "vue": "Vue",
-        "vueRouter": "VueRouter"
-      }
-    ]
+      {"type": "variable", "format": "camelCase"},
+      {"type": "variable", "modifiers": "const", "format": ["camelCase", "UPPER_CASE"], "final": true},
+      {"type": "variable", "modifiers": "export", "format": "PascalCase", "final": true}
+    ],
+    "object-shorthand-properties-first": false,
+    "space-before-function-paren": [true, "never"],
+    "ter-prefer-arrow-callback": false,
+    "variable-name": false
   }
 }

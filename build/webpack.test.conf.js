@@ -5,6 +5,7 @@ const utils = require('./utils')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const webpackConfig = merge(baseWebpackConfig, {
   // use inline sourcemap for karma-sourcemap-loader
@@ -14,15 +15,16 @@ const webpackConfig = merge(baseWebpackConfig, {
   devtool: '#inline-source-map',
   resolveLoader: {
     alias: {
-      // necessary to to make lang="scss" work in test when using vue-loader's ?inject option
-      // see discussion at https://github.com/vuejs/vue-loader/issues/724
       'scss-loader': 'sass-loader'
     }
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../config/test.env')
-    })
+    }),
+    new ExtractTextPlugin({
+      filename: utils.assetsPath('css/[name].[contenthash].css')
+    }),
   ]
 })
 

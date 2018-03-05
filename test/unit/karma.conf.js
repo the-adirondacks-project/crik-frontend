@@ -7,16 +7,15 @@ module.exports = function karmaConfig (config) {
     reporters: ['spec', 'coverage'],
     files: ['./index.js'],
     preprocessors: {
-      './index.js': ['webpack', 'sourcemap']
+      './index.js': ['webpack', 'sourcemap', 'coverage']
     },
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true
     },
     coverageReporter: {
-      dir: './coverage',
+      dir: '../../coverage',
       reporters: [
-        { type: 'lcov', subdir: '.' },
         { type: 'text-summary' }
       ]
     }
