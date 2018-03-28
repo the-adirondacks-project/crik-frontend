@@ -8,6 +8,7 @@ import template from './library-list.html';
 import { AddButton } from './add-button';
 import { TopBar } from './top-bar';
 
+
 export const LibraryList = Vue.component('library-list', {
   name: 'LibraryList',
   template,
