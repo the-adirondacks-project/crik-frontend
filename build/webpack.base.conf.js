@@ -76,5 +76,8 @@ module.exports = {
   resolve: {
     plugins: [new TsconfigPathsPlugin()],
     extensions: ['.js', '.ts', '.json'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+    }
   },
 }
