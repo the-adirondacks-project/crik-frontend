@@ -1,0 +1,14 @@
+<div style="height: 100%">
+  <div class="left-bar">
+    <div
+      class="left-button"
+      v-bind:class="{ selected: tab === selected }"
+      v-for="tab in tabs"
+      v-on:click="handleClick(tab)">
+      {{ tab.name }}
+    </div>
+  </div>
+  <div class="content-pane">
+    <slot></slot>
+  </div>
+</div>

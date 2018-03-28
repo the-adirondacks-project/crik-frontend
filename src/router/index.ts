@@ -1,10 +1,10 @@
 import VueRouter from 'vue-router';
 import Vue from 'vue';
 
-import LibraryList from '@/components/LibraryList';
-import VideoList from '@/components/VideoList';
-import Video from '@/components/Video';
-import VideoPlayer from '@/components/VideoPlayer';
+import { LibraryList } from '@components/library-list';
+import { VideoList } from '@components/video-list';
+import { Video } from '@components/video';
+import { VideoPlayer } from '@components/video-player';
 
 Vue.use(VueRouter);
 

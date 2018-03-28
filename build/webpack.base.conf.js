@@ -3,6 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -15,32 +16,26 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        exclude: /node_modules/,
-        include: [resolve('src')],
-        loader: 'tslint-loader',
-        test: /^(?!.*vue).*\.ts$/,
+        test: /\.ts$/,
+        loader: 'ts-loader',
       },
       {
         test: /\.ts$/,
-        loader: 'ts-loader',
-        options: {
-          appendTsSuffixTo: [/\.vue$/],
-        }
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            ts: 'ts-loader!tslint-loader'
-          }
-        }
+        loader: 'tslint-loader',
+        include: [
+          path.resolve(__dirname, 'src')
+        ],
+        enforce: 'pre',
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader',
+        options: {}
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -79,10 +74,7 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.ts', '.js', '.vue', '.json'],
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
-    }
+    plugins: [new TsconfigPathsPlugin()],
+    extensions: ['.js', '.ts', '.json'],
   },
 }
