@@ -7,7 +7,7 @@ export interface RawVideo {
 }
 
 export class Video {
-  static validate({ name, id }: RawVideo): boolean {
+  static isValid({ name, id }: any): boolean {
     if (!_.isString(name)) {
       return false;
     }
