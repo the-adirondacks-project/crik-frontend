@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as _ from 'lodash';
 
 import { Client } from './client';
-import { Either, Left, Right } from '../utils/either';
 import { InvalidResponseError, NotFoundError } from './errors';
 import { Video, RawVideo } from '../types/video';
 

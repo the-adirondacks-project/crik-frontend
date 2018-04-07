@@ -2,7 +2,6 @@
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
-const vueLoaderConfig = require('./vue-loader.conf')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 function resolve (dir) {

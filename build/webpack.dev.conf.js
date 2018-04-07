@@ -9,8 +9,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
-const WebpackWatchPlugin = require('./webpack-watch')
-
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
@@ -36,12 +34,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
-    new WebpackWatchPlugin({
-      includes: [
-        'src/services/*.ts',
-      ],
-      excludes: [],
-    }),
     new webpack.DefinePlugin({
 			'process.env': require('../config/dev.env')
     }),

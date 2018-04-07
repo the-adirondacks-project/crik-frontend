@@ -1,4 +1,3 @@
-import { Either } from '../utils/either';
 import { ResourceError } from './errors';
 
 export interface Client<T> {
