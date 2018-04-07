@@ -5,6 +5,8 @@ import Vue from 'vue';
 
 import template from './video.html';
 
+import { VideoClient } from '../resources/video'
+
 export const Video = Vue.component('video', {
   name: 'Video',
   template,

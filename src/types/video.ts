@@ -3,7 +3,6 @@ import * as _ from 'lodash';
 export interface RawVideo {
   name: string;
   id: number;
-
 }
 
 export class Video {
