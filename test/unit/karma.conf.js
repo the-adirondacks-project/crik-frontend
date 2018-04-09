@@ -5,6 +5,8 @@ process.env.CHROMIUM_BIN = require('puppeteer').executablePath();
 module.exports = function karmaConfig (config) {
   config.set({
     browsers: ['ChromiumNoSandbox'],
+    browserDisconnectTolerance: 3,
+    browserNoActivityTimeout: 25000,
     customLaunchers: {
       ChromiumNoSandbox: {
         base: 'ChromiumHeadless',
